@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <br>
+  <center>
+    <h1>Mopedo Payment Page..... </h1>
+    <br>
+    <hr>
+    <form  action="javascript:myFunction()"  method="post">
+      <label for="amountEnterByUsers">Enter Amount</label>
+      <input type="number" name="amountEnterByUsers" id="amountEnterByUsers">
+      <div id="ck-button">
+        <label>
+          <input type="checkbox" value="1" name="fooby[1][]" id="razarpay"><span style="height: 44px;">Razor Pay</span>
+        </label>
+      </div>
+
+      <div id="ck-button">
+        <label>
+          <input type="checkbox" value="2" name="fooby[1][]" id="Phonepe"><span style="height: 44px;">Phonepe Pay</span>
+        </label>
+      </div>
+
+      <br>
+      <hr>
+      <button type="submit" name="submit_form">Pay Now</button>
+    </form>
+  </center>
+  <div id="result"></div>
+</body>
+
+</html>
+
+
+
+<script>
+
+
+  $("input:checkbox").on('click', function () {
+    // in the handler, 'this' refers to the box clicked on
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      // the name of the box is retrieved using the .attr() method
+      // as it is assumed and expected to be immutable
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      // the checked state of the group/box on the other hand will change
+      // and the current value is retrieved using .prop() method
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+  });
+
+
+  const myFunction=()=> {
+    // e.preventDefault();
+
+    var x = document.getElementById("razarpay");
+    var y = document.getElementById("Phonepe");
+    var amount=document.getElementById("amountEnterByUsers");
+    if (x.checked == true && x.value == "1") {
+      // location.href="pay.php?amount";
+      // location.replace("pay.php");
+      window.location.href = "pay.php?amount=" + amount.value;
+    } else if (y.checked == true && y.value == "2") {
+      window.location.href = "phonepe.php?amount=" + amount.value;
+    } else {
+      alert("please select payment method");
+
+    }
+   
+
+  }
+  
+</script>
